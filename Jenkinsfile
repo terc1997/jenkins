@@ -13,18 +13,13 @@ pipeline {
     }
     
     stage("test") {
-      when{
-        expression{
-          BRANCH_NAME == 'main'
-        }
-      }
-      steps{
+      steps {
         echo 'testing the application'
       }
     }
     
     stage("deploy") {
-      steps{
+      steps {
         echo 'deploying the application'
         echo "deploying an application of ${SERVER_CREDENTIALS}"
       }
