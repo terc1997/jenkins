@@ -4,6 +4,12 @@ pipeline {
     NEW_VERSION = '1.3.0'
     SERVER_CREDENTIALS=credentials('github-credentials')
   }
+  parameters {
+    string(name: 'VERSION',defaulValue:'',description: 'version to deploy on prod')
+    choice(name: 'VERSION', choices:['1.1.0','1.2.0','1.3.0'], description:'')
+    booleanParam(name:'executeTests',defaultValue:true,description:'')
+  }
+  
   stages {
     stage("build") {
       steps{
@@ -13,6 +19,11 @@ pipeline {
     }
     
     stage("test") {
+      when {
+        expression {
+          params.executeTests
+        }
+      }
       steps {
         echo 'testing the application'
       }
@@ -21,7 +32,7 @@ pipeline {
     stage("deploy") {
       steps {
         echo 'deploying the application'
-        echo "deploying an application of ${SERVER_CREDENTIALS}"
+        echo "deploying an application of ${VERSION}"
       }
     }
   }
