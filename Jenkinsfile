@@ -5,7 +5,7 @@ pipeline {
     SERVER_CREDENTIALS=credentials('github-credentials')
   }
   parameters {
-    string(name: 'VERSION',defaulValue:'',description: 'version to deploy on prod')
+    string(name: 'VERSION',defaultValue:'',description: 'version to deploy on prod')
     choice(name: 'VERSION', choices:['1.1.0','1.2.0','1.3.0'], description:'')
     booleanParam(name:'executeTests',defaultValue:true,description:'')
   }
