@@ -22,7 +22,9 @@ pipeline {
     }
     stage("build") {
       steps{
-        gv.buildApp()
+        script {
+          gv.buildApp()
+        }
         echo "building version ${NEW_VERSION}"
       }
     }
